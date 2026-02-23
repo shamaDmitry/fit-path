@@ -46,7 +46,8 @@ const Index = () => {
 
             <Button
               onClick={() => navigate("/quiz")}
-              className="text-primary font-medium hover:underline"
+              variant="ghost"
+              className="font-medium hover:underline"
             >
               Take the Quiz →
             </Button>
@@ -68,7 +69,7 @@ const Index = () => {
 
               <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 Your personalized path to a{" "}
-                <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                   healthier you
                 </span>
               </h1>
@@ -88,6 +89,7 @@ const Index = () => {
                   Start Free Quiz
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
+
                 <button className="px-8 py-4 bg-card border-2 border-border text-foreground font-semibold rounded-xl hover:bg-accent transition-all">
                   Learn More
                 </button>
@@ -143,21 +145,26 @@ const Index = () => {
                         transition={{ delay: 0.4 + i * 0.1 }}
                         className="flex items-start gap-3 p-3 bg-accent rounded-xl"
                       >
-                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+
                         <span className="text-foreground">{benefit}</span>
                       </motion.div>
                     ))}
                   </div>
 
-                  <motion.button
-                    onClick={() => navigate("/quiz")}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="w-full mt-6 py-4 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft hover:shadow-glow transition-all"
+                  <Button
+                    asChild
+                    className="w-full h-auto mt-6 py-4 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft hover:shadow-glow transition-all text-base"
                   >
-                    Get My Free Plan
-                  </motion.button>
+                    <motion.button
+                      onClick={() => navigate("/quiz")}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.8 }}
+                    >
+                      Get My Free Plan
+                    </motion.button>
+                  </Button>
                 </div>
               </div>
 
@@ -167,7 +174,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-card/95 backdrop-blur border-t border-border">
+        {/* <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-card/95 backdrop-blur border-t border-border">
           <button
             onClick={() => navigate("/quiz")}
             className="w-full py-4 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft flex items-center justify-center gap-2"
@@ -175,7 +182,7 @@ const Index = () => {
             Start Free Quiz
             <ArrowRight className="w-5 h-5" />
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

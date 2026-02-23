@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import type { ReactNode } from "react";
+import { QuizProgress } from "@/components/quiz/QuizProgress";
 
 interface QuizContainerProps {
   children: ReactNode;
@@ -32,7 +33,7 @@ export function QuizContainer({
   return (
     <div className="min-h-screen gradient-warm flex flex-col">
       <div className="w-full max-w-lg mx-auto px-4 pt-8">
-        {/* <QuizProgress currentStep={currentStep} totalSteps={totalSteps} /> */}
+        <QuizProgress currentStep={currentStep} totalSteps={totalSteps} />
       </div>
 
       <div className="flex-1 flex items-center justify-center p-4">
