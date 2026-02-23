@@ -27,10 +27,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen gradient-warm overflow-hidden">
-      {/* Hero Section */}
       <div className="relative">
         <div className="max-w-6xl mx-auto px-4 pt-12 pb-20">
-          {/* Nav */}
           <motion.nav
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,7 +52,6 @@ const Index = () => {
             </Button>
           </motion.nav>
 
-          {/* Hero Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -96,7 +93,6 @@ const Index = () => {
                 </button>
               </div>
 
-              {/* Stats */}
               <div className="flex gap-8 pt-4">
                 {stats.map((stat, i) => (
                   <motion.div
@@ -116,7 +112,6 @@ const Index = () => {
               </div>
             </motion.div>
 
-            {/* Hero Visual */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -166,14 +161,12 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Background decoration */}
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
               <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-secondary rounded-full blur-3xl" />
             </motion.div>
           </div>
         </div>
 
-        {/* Mobile CTA */}
         <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-card/95 backdrop-blur border-t border-border">
           <button
             onClick={() => navigate("/quiz")}
