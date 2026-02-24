@@ -23,7 +23,7 @@ export function UnitToggle<T extends string>({
           className={cn(
             "relative px-4 py-2 text-sm font-medium rounded-md transition-colors",
             value === option.value
-              ? "text-primary-foreground"
+              ? "text-primary-foreground hover:text-primary-foreground"
               : "text-muted-foreground hover:text-foreground",
           )}
         >

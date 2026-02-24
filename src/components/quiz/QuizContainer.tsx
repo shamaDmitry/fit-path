@@ -37,7 +37,7 @@ export function QuizContainer({
       </div>
 
       <div className="flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-lg">
+        <div className="w-full max-w-lg overflow-hidden">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentStep}
@@ -50,7 +50,7 @@ export function QuizContainer({
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 },
               }}
-              className="bg-card rounded-2xl shadow-medium p-8"
+              className="bg-card rounded-2xl shadow-medium p-4 md:p-8"
             >
               {children}
             </motion.div>

@@ -122,6 +122,7 @@ export function validateHealthGoals(data: QuizData): HealthValidation {
     suggestions.push(
       "Consider setting intermediate milestones with your healthcare provider.",
     );
+
     isValid = false;
   }
 
@@ -134,6 +135,7 @@ export function validateHealthGoals(data: QuizData): HealthValidation {
 
   // Recommend a healthy goal weight if needed
   let recommendedGoal = goalWeightKg;
+
   if (goalBmi < 18.5) {
     recommendedGoal = healthyRange.min + 2; // A bit above minimum for safety
   }

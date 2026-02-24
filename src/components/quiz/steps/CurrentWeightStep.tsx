@@ -77,8 +77,8 @@ export function CurrentWeightStep({
       <div className="flex justify-center">
         <UnitToggle
           options={[
-            { value: "lbs" as WeightUnit, label: "Pounds" },
             { value: "kg" as WeightUnit, label: "Kilograms" },
+            { value: "lbs" as WeightUnit, label: "Pounds" },
           ]}
           value={unit}
           onChange={handleUnitChange}

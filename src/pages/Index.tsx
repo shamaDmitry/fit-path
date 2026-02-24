@@ -80,15 +80,19 @@ const Index = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <motion.button
-                  onClick={() => navigate("/quiz")}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-8 py-4 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft hover:shadow-glow transition-all flex items-center justify-center gap-2"
+                <Button
+                  asChild
+                  className="h-auto has-[>svg]:px-5 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft hover:shadow-glow transition-all flex items-center justify-center gap-2"
                 >
-                  Start Free Quiz
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
+                  <motion.button
+                    onClick={() => navigate("/quiz")}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Start Free Quiz
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.button>
+                </Button>
 
                 <button className="px-8 py-4 bg-card border-2 border-border text-foreground font-semibold rounded-xl hover:bg-accent transition-all">
                   Learn More
@@ -173,16 +177,6 @@ const Index = () => {
             </motion.div>
           </div>
         </div>
-
-        {/* <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-card/95 backdrop-blur border-t border-border">
-          <button
-            onClick={() => navigate("/quiz")}
-            className="w-full py-4 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft flex items-center justify-center gap-2"
-          >
-            Start Free Quiz
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div> */}
       </div>
     </div>
   );

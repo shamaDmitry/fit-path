@@ -80,8 +80,8 @@ export function HeightStep({
       <div className="flex justify-center">
         <UnitToggle
           options={[
-            { value: "in" as HeightUnit, label: "Inches" },
             { value: "cm" as HeightUnit, label: "Centimeters" },
+            { value: "in" as HeightUnit, label: "Inches" },
           ]}
           value={unit}
           onChange={handleUnitChange}
