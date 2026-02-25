@@ -82,7 +82,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   asChild
-                  className="h-auto has-[>svg]:px-5 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft hover:shadow-glow transition-all flex items-center justify-center gap-2"
+                  className="h-auto py-4 text-base has-[>svg]:px-5 gradient-hero text-primary-foreground font-semibold rounded-xl shadow-soft hover:shadow-glow transition-all flex items-center justify-center gap-2"
                 >
                   <motion.button
                     onClick={() => navigate("/quiz")}
@@ -93,10 +93,6 @@ const Index = () => {
                     <ArrowRight className="w-5 h-5" />
                   </motion.button>
                 </Button>
-
-                <button className="px-8 py-4 bg-card border-2 border-border text-foreground font-semibold rounded-xl hover:bg-accent transition-all">
-                  Learn More
-                </button>
               </div>
 
               <div className="flex gap-8 pt-4">

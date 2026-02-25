@@ -23,7 +23,7 @@ export default function Quiz() {
 
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("test@test.com");
 
   const [quizData, setQuizData] = useState<QuizData>({
     weightUnit: "kg",
@@ -36,7 +36,7 @@ export default function Quiz() {
     goalWeight: 90,
     activityLevel: "very_active",
     goalPace: "aggressive",
-    motivation: "test",
+    motivation: "Feel more confident",
     dietaryPreferences: ["vegetarian"],
   });
 
@@ -175,13 +175,13 @@ export default function Quiz() {
       totalSteps={TOTAL_STEPS}
       direction={direction}
     >
-      {new Array(11).fill({}).map((_, index) => {
+      {/* {new Array(11).fill({}).map((_, index) => {
         return (
           <Button key={index} onClick={() => setStep(index + 1)}>
             {index + 1}
           </Button>
         );
-      })}
+      })} */}
 
       {renderStep()}
     </QuizContainer>

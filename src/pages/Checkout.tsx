@@ -7,6 +7,7 @@ import type { QuizData } from "@/types/quiz";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 const plans = [
   {
@@ -47,6 +48,7 @@ const features = [
 
 export default function Checkout() {
   const navigate = useNavigate();
+
   const [selectedPlan, setSelectedPlan] = useState(
     "price_1T4IEgATPQNp3wNr2msS4yWL",
   );
@@ -75,11 +77,41 @@ export default function Checkout() {
 
   const handleCheckout = async () => {
     setIsProcessing(true);
-    // Stripe checkout
-    await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    setIsProcessing(false);
-    toast("Checkout complete!");
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        "create-checkout",
+        {
+          body: {
+            email: email,
+            priceId: selectedPlanData?.priceId,
+            quizData: quizData,
+          },
+        },
+      );
+
+      if (error) {
+        console.error("Function error:", error);
+        toast.error("Could not initialize checkout. Please try again.", {
+          classNames: {
+            title: "text-red-600!",
+            icon: "text-red-600!",
+          },
+        });
+
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data?.url;
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   useEffect(() => {
