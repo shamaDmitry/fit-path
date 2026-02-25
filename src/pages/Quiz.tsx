@@ -14,7 +14,7 @@ import { PaceStep } from "@/components/quiz/steps/PaceStep";
 import { MotivationStep } from "@/components/quiz/steps/MotivationStep";
 import { DietaryStep } from "@/components/quiz/steps/DietaryStep";
 import { ResultsStep } from "@/components/quiz/steps/ResultsStep";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 const TOTAL_STEPS = 10;
 

@@ -28,6 +28,7 @@ serve(async (req) => {
 
   // If user exists, we fetch their ID
   let userId = userData?.user?.id;
+
   if (userError) {
     const { data: existingUser } = await supabaseAdmin
       .from("profiles")
