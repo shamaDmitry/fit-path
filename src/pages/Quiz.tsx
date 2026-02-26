@@ -14,7 +14,6 @@ import { PaceStep } from "@/components/quiz/steps/PaceStep";
 import { MotivationStep } from "@/components/quiz/steps/MotivationStep";
 import { DietaryStep } from "@/components/quiz/steps/DietaryStep";
 import { ResultsStep } from "@/components/quiz/steps/ResultsStep";
-// import { Button } from "@/components/ui/button";
 
 const TOTAL_STEPS = 10;
 
@@ -175,14 +174,6 @@ export default function Quiz() {
       totalSteps={TOTAL_STEPS}
       direction={direction}
     >
-      {/* {new Array(11).fill({}).map((_, index) => {
-        return (
-          <Button key={index} onClick={() => setStep(index + 1)}>
-            {index + 1}
-          </Button>
-        );
-      })} */}
-
       {renderStep()}
     </QuizContainer>
   );

@@ -25,6 +25,7 @@ export function WelcomeStep({ onNext }: WelcomeStepProps) {
         <h1 className="font-heading text-3xl font-bold text-foreground mb-3">
           Start Your Transformation
         </h1>
+
         <p className="text-muted-foreground text-lg">
           Answer a few questions so we can create your personalized weight loss
           plan.
@@ -35,7 +36,7 @@ export function WelcomeStep({ onNext }: WelcomeStepProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="flex gap-4 *:flex-1"
+        className="flex gap-4 *:flex-1 flex-col"
       >
         <QuizButton
           variant="outline"

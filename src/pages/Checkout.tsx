@@ -17,6 +17,7 @@ const plans = [
     period: "month",
     savings: null,
     priceId: "price_1T4IC2ATPQNp3wNrRzoEo6LF",
+    monthsQuantity: 1,
   },
   {
     id: "quarterly",
@@ -26,6 +27,7 @@ const plans = [
     savings: "Save 33%",
     popular: true,
     priceId: "price_1T4IEgATPQNp3wNr2msS4yWL",
+    monthsQuantity: 3,
   },
   {
     id: "annual",
@@ -34,6 +36,7 @@ const plans = [
     period: "month",
     savings: "Save 57%",
     priceId: "price_1T4IEgATPQNp3wNrAwrw2Dnb",
+    monthsQuantity: 12,
   },
 ];
 
@@ -123,8 +126,8 @@ export default function Checkout() {
   return (
     <div className="min-h-screen gradient-warm">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="flex items-center gap-4 mb-8">
-          <Button onClick={() => navigate(-1)}>
+        <div className="flex gap-4 mb-8">
+          <Button onClick={() => navigate("/quiz")}>
             <ArrowLeft className="w-5 h-5" />
           </Button>
 
@@ -139,13 +142,13 @@ export default function Checkout() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-5 md:gap-8">
           <div className="md:col-span-3 space-y-6">
             {quizData && validation && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-card rounded-2xl shadow-soft p-6 border border-border"
+                className="bg-card rounded-2xl shadow-soft p-4 md:p-6 border border-border"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 gradient-hero rounded-full flex items-center justify-center">
@@ -153,6 +156,7 @@ export default function Checkout() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Your Goal</h3>
+
                     <p className="text-sm text-muted-foreground">
                       Lose{" "}
                       {(quizData.currentWeight || 0) -
@@ -174,7 +178,7 @@ export default function Checkout() {
                 Choose your plan
               </h2>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {plans.map((plan, index) => {
                   return (
                     <Button
@@ -201,7 +205,8 @@ export default function Checkout() {
                             Most Popular
                           </span>
                         )}
-                        <div className="flex items-center justify-between w-full">
+
+                        <div className="flex items-center justify-between w-full gap-2">
                           <div className="flex items-center gap-4">
                             <div
                               className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
@@ -216,7 +221,7 @@ export default function Checkout() {
                             </div>
 
                             <div>
-                              <p className="font-semibold text-foreground">
+                              <p className="font-bold text-foreground text-lg">
                                 {plan.name}
                               </p>
 
@@ -228,14 +233,20 @@ export default function Checkout() {
                             </div>
                           </div>
 
-                          <div className="text-right">
-                            <p className="text-2xl font-bold text-foreground">
-                              ${plan.price}
-                            </p>
+                          <div>
+                            <div className="text-sm text-center text-muted-foreground flex items-end gap-1 flex-col md:flex-row md:items-center md:gap-2">
+                              <p>Total</p>
 
-                            <p className="text-sm text-muted-foreground">
-                              per {plan.period}
-                            </p>
+                              <p className="text-2xl font-bold text-foreground">
+                                ${plan.price * plan.monthsQuantity}
+                              </p>
+                            </div>
+
+                            <div className="text-right w-full flex items-center gap-1 justify-center flex-col">
+                              <span className="text-lg font-normal text-foreground">
+                                $ {plan.price} / mo
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </motion.button>
@@ -249,112 +260,129 @@ export default function Checkout() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="bg-card rounded-2xl shadow-soft p-6 border border-border"
+              className="bg-card rounded-2xl shadow-soft p-4 md:p-6 border border-border"
             >
               <h3 className="font-semibold text-foreground mb-4">
                 What's included
               </h3>
 
-              <div className="grid grid-cols-2 gap-3">
-                {features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-2">
-                    <div className="w-5 h-5 gradient-hero rounded-full flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-primary-foreground" />
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-3">
+                {features.map((feature) => {
+                  return (
+                    <div key={feature} className="flex items-center gap-2">
+                      <div className="w-5 h-5 gradient-hero rounded-full flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-primary-foreground" />
+                      </div>
+
+                      <span className="text-sm text-foreground">{feature}</span>
                     </div>
-
-                    <span className="text-sm text-foreground">{feature}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
           </div>
 
-          <div className="md:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="bg-card rounded-2xl shadow-medium p-6 border border-border sticky top-8"
-            >
-              <h3 className="font-heading text-lg font-semibold text-foreground mb-4">
-                Order Summary
-              </h3>
-
-              <div className="space-y-3 pb-4 border-b border-border">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Email for order:
-                  </span>
-
-                  <span className="font-medium">{email}</span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    {selectedPlanData?.name} Plan
-                  </span>
-
-                  <span className="font-medium">
-                    ${selectedPlanData?.price}/mo
-                  </span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    7-day free trial
-                  </span>
-
-                  <span className="text-primary font-medium">Free</span>
-                </div>
-              </div>
-
-              <div className="py-4 border-b border-border">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-foreground">
-                    Due today
-                  </span>
-
-                  <span className="text-2xl font-bold text-primary">$0.00</span>
-                </div>
-
-                <p className="text-sm text-muted-foreground mt-1">
-                  Then ${selectedPlanData?.price}/month after trial
-                </p>
-              </div>
-
-              <Button
-                onClick={handleCheckout}
-                disabled={isProcessing}
-                className="w-full mt-4 py-4 disabled:opacity-50"
+          {selectedPlanData && (
+            <div className="md:col-span-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-card rounded-2xl shadow-medium p-4 md:p-6 border border-border sticky top-8"
               >
-                {isProcessing ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <CreditCard className="w-5 h-5" />
-                    Start Free Trial
-                  </>
-                )}
-              </Button>
+                <h3 className="font-heading text-lg font-semibold text-foreground mb-4">
+                  Order Summary
+                </h3>
 
-              <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <Shield className="w-4 h-4" />
+                <div className="space-y-3 pb-4 border-b border-border">
+                  <div className="flex justify-between gap-1">
+                    <span className="text-muted-foreground">
+                      Email for order:
+                    </span>
 
-                <span>Cancel anytime. No hidden fees.</span>
-              </div>
+                    <span className="font-medium">{email}</span>
+                  </div>
 
-              <div className="mt-4 pt-4 border-t border-border">
-                <p className="text-xs text-muted-foreground text-center">
-                  By continuing, you agree to our Terms of Service and Privacy
-                  Policy. Your subscription will automatically renew unless
-                  cancelled.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+                  <div className="flex justify-between gap-1">
+                    <span className="text-muted-foreground">
+                      {selectedPlanData?.name} Plan
+                    </span>
+
+                    <span className="font-medium">
+                      ${selectedPlanData?.price}/mo
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between gap-1">
+                    <span className="text-muted-foreground">Total</span>
+
+                    <span className="font-medium">
+                      $
+                      {selectedPlanData?.price *
+                        selectedPlanData?.monthsQuantity}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between gap-1">
+                    <span className="text-muted-foreground">
+                      7-day free trial
+                    </span>
+
+                    <span className="text-primary font-medium">Free</span>
+                  </div>
+                </div>
+
+                <div className="py-4 border-b border-border">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-foreground">
+                      Due today
+                    </span>
+
+                    <span className="text-2xl font-bold text-primary">
+                      $0.00
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Then ${selectedPlanData?.price}/month after trial
+                  </p>
+                </div>
+
+                <Button
+                  onClick={handleCheckout}
+                  disabled={isProcessing}
+                  className="w-full disabled:opacity-50"
+                  size={"lg"}
+                >
+                  {isProcessing ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <CreditCard className="w-5 h-5" />
+                      Start Free Trial
+                    </>
+                  )}
+                </Button>
+
+                <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Shield className="w-4 h-4" />
+
+                  <span>Cancel anytime. No hidden fees.</span>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-border">
+                  <p className="text-xs text-muted-foreground text-center">
+                    By continuing, you agree to our Terms of Service and Privacy
+                    Policy. Your subscription will automatically renew unless
+                    cancelled.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          )}
         </div>
       </div>
     </div>

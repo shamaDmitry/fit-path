@@ -60,7 +60,7 @@ export function ResultsStep({
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 text-center">
+      <div className="grid md:grid-cols-3 gap-3 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,12 +149,22 @@ export function ResultsStep({
         />
       </div>
 
-      <div className="flex gap-3">
-        <QuizButton variant="outline" onClick={onBack} className="px-4">
+      <div className="flex flex-col md:flex-row gap-3">
+        <QuizButton
+          variant="outline"
+          onClick={onBack}
+          className="px-4"
+          size="lg"
+        >
           <ArrowLeft className="w-5 h-5" />
         </QuizButton>
 
-        <QuizButton size="lg" onClick={onCheckout} disabled={!email}>
+        <QuizButton
+          className="order-first md:order-last"
+          size="lg"
+          onClick={onCheckout}
+          disabled={!email}
+        >
           Start My Journey
         </QuizButton>
       </div>

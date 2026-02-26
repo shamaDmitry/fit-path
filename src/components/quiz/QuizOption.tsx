@@ -30,18 +30,19 @@ export function QuizOption({
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-col md:flex-row">
         {icon && (
           <div
             className={cn(
-              "w-12 h-12 rounded-lg flex items-center justify-center text-2xl",
+              "size-12 shrink-0 rounded-lg flex items-center justify-center text-2xl",
               selected ? "bg-primary/10" : "bg-muted",
             )}
           >
             {icon}
           </div>
         )}
-        <div className="flex-1">
+
+        <div className="flex-1 text-center md:text-left">
           <p
             className={cn(
               "font-semibold",
@@ -50,12 +51,14 @@ export function QuizOption({
           >
             {label}
           </p>
+
           {description && (
             <p className="text-sm text-muted-foreground mt-0.5">
               {description}
             </p>
           )}
         </div>
+
         <div
           className={cn(
             "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all",
