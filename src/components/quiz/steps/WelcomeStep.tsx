@@ -36,7 +36,7 @@ export function WelcomeStep({ onNext }: WelcomeStepProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="flex gap-4 *:flex-1 flex-col"
+        className="flex gap-4 *:flex-1 flex-col md:flex-row"
       >
         <QuizButton
           variant="outline"
