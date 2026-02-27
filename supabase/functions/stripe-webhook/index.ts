@@ -49,7 +49,7 @@ serve(async (req) => {
       // Update user in Supabase
       await supabaseAdmin
         .from("profiles")
-        .update({ is_subscriber: true })
+        .update({ is_subscriber: true, stripe_customer_id: session.customer })
         .eq("id", userId);
 
       // Fetch the quiz data to generate the PDF
