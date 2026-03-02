@@ -46,7 +46,6 @@ serve(async (req) => {
     const customerEmail = session.customer_email;
 
     if (userId) {
-      // Update user in Supabase
       await supabaseAdmin
         .from("profiles")
         .update({ is_subscriber: true, stripe_customer_id: session.customer })
@@ -59,8 +58,18 @@ serve(async (req) => {
         .eq("id", userId)
         .single();
 
-      // 3. Generate PDF and Send Email
+      // 3. Generate PDF, store it, and send email
       const pdfBytes = await generateCustomPDF(profile?.quiz_results);
+      const pdfPath = await storePdfAndGetPath(userId, pdfBytes);
+
+      if (pdfPath) {
+        await supabaseAdmin
+          .from("profiles")
+          .update({
+            pdf_path: pdfPath,
+          })
+          .eq("id", userId);
+      }
 
       await sendEmailWithPDF(customerEmail, pdfBytes);
     }
@@ -88,6 +97,7 @@ async function generateCustomPDF(quizData: any) {
   const introText = quizData
     ? `Based on your answers, here is your 12-week roadmap.`
     : `Welcome to your new healthy lifestyle.`;
+
   page.drawText(introText, { x: 50, y: 650, size: 14, font });
 
   page.drawText("• Daily Calorie Goal: Calculated for healthy deficit", {
@@ -112,6 +122,35 @@ async function generateCustomPDF(quizData: any) {
   return await pdfDoc.save();
 }
 
+async function storePdfAndGetPath(userId: string, pdfBytes: Uint8Array) {
+  const bucket = "pdfs";
+  const filePath = `plans/${userId}/${Date.now()}-weight-loss-plan.pdf`;
+
+  const { data: buckets } = await supabaseAdmin.storage.listBuckets();
+
+  const bucketExists = buckets?.some((b) => b.name === bucket);
+
+  if (!bucketExists) {
+    await supabaseAdmin.storage.createBucket(bucket, {
+      public: false,
+    });
+  }
+
+  const { error: uploadError } = await supabaseAdmin.storage
+    .from(bucket)
+    .upload(filePath, pdfBytes, {
+      contentType: "application/pdf",
+      upsert: true,
+    });
+
+  if (uploadError) {
+    console.error("Failed to upload PDF:", uploadError.message);
+    return null;
+  }
+
+  return filePath;
+}
+
 async function sendEmailWithPDF(email: string, pdfBytes: Uint8Array) {
   const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")!;
   const pdfBase64 = Buffer.from(pdfBytes).toString("base64");
@@ -123,7 +162,7 @@ async function sendEmailWithPDF(email: string, pdfBytes: Uint8Array) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Fit Path <onboarding@resend.dev>",
+      from: "Fit Path <pdf@fitpath.dev>",
       to: email,
       subject: "Your Personal Weight Loss Plan is Here! 🚀",
       html: "<p>Thank you for starting your free trial! Your custom 12-week plan is attached below.</p>",

@@ -23,7 +23,7 @@ export default function Quiz() {
 
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
-  const [email, setEmail] = useState("test@test.com");
+  const [email, setEmail] = useState("shama.dmitry@gmail.com");
 
   const [quizData, setQuizData] = useState<QuizData>({
     weightUnit: "kg",

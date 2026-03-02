@@ -23,8 +23,14 @@ export function WeightChart({ data, goalWeight, unit }: WeightChartProps) {
   const minWeight = Math.min(goalWeight * 0.95, ...data.map((d) => d.weight));
 
   return (
-    <div className="w-full h-64 mt-6">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full h-64 min-h-64 mt-6">
+      <ResponsiveContainer
+        width="100%"
+        height="100%"
+        minHeight={256}
+        minWidth={0}
+        className="min-h-64"
+      >
         <LineChart
           data={data}
           margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
