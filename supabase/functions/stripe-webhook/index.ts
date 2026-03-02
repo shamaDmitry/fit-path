@@ -162,7 +162,7 @@ async function sendEmailWithPDF(email: string, pdfBytes: Uint8Array) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Fit Path <pdf@fitpath.dev>",
+      from: "Fit Path <onboarding@resend.dev>",
       to: email,
       subject: "Your Personal Weight Loss Plan is Here! 🚀",
       html: "<p>Thank you for starting your free trial! Your custom 12-week plan is attached below.</p>",
