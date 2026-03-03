@@ -9,9 +9,9 @@ import SuccessPage from "@/pages/Success";
 
 function App() {
   return (
-    // <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -23,7 +23,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-    // </QueryClientProvider>
   );
 }
 

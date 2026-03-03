@@ -18,6 +18,7 @@ export function convertFromKg(value: number, unit: "lbs" | "kg"): number {
 // Calculate BMI
 export function calculateBmi(weightKg: number, heightCm: number): number {
   const heightM = heightCm / 100;
+
   return weightKg / (heightM * heightM);
 }
 

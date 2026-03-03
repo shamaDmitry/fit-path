@@ -14,30 +14,33 @@ import { PaceStep } from "@/components/quiz/steps/PaceStep";
 import { MotivationStep } from "@/components/quiz/steps/MotivationStep";
 import { DietaryStep } from "@/components/quiz/steps/DietaryStep";
 import { ResultsStep } from "@/components/quiz/steps/ResultsStep";
-import { Button } from "@/components/ui/button";
 
 const TOTAL_STEPS = 10;
+
+// const exampleData = {
+//   weightUnit: "kg",
+//   heightUnit: "cm",
+//   gender: "male",
+//   age: 35,
+//   heightValue: 186,
+//   currentWeight: 120,
+//   goalWeight: 90,
+//   activityLevel: "very_active",
+//   goalPace: "aggressive",
+//   motivation: "Feel more confident",
+//   dietaryPreferences: ["vegetarian"],
+// };
 
 export default function Quiz() {
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
-  const [email, setEmail] = useState("shama.dmitry@gmail.com");
+  const [email, setEmail] = useState("");
 
   const [quizData, setQuizData] = useState<QuizData>({
     weightUnit: "kg",
     heightUnit: "cm",
-
-    gender: "male",
-    age: 35,
-    heightValue: 186,
-    currentWeight: 120,
-    goalWeight: 90,
-    activityLevel: "very_active",
-    goalPace: "aggressive",
-    motivation: "Feel more confident",
-    dietaryPreferences: ["vegetarian"],
   });
 
   const goNext = useCallback(() => {
@@ -175,8 +178,6 @@ export default function Quiz() {
       totalSteps={TOTAL_STEPS}
       direction={direction}
     >
-      <Button onClick={() => setStep(11)}>go to 11</Button>
-
       {renderStep()}
     </QuizContainer>
   );

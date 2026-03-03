@@ -35,8 +35,6 @@ export default function SuccessPage() {
           },
         );
 
-        console.log({ data, error });
-
         if (error) {
           throw error;
         }
